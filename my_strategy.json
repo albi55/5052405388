@@ -1,0 +1,10 @@
+{
+  "name": "rsi_oversold",
+  "symbol": "GBPUSD",
+  "timeframe": "H4",
+  "direction": 1,
+  "entry": { "type": "rsi", "params": { "period": 14, "level": 30 } },
+  "exit":  { "type": "atr_trailing", "params": { "atr_period": 14, "atr_mult": 2.0 } },
+  "sizing": { "type": "fixed_notional", "params": { "notional": 10000 } },
+  "sweep": { "entry.params.level": [25, 30, 35] }
+}
