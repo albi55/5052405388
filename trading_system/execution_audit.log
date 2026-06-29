@@ -1,0 +1,5 @@
+2026-06-29 21:04:15,315 INFO preflight: ok=False reason=EXECUTION_ENABLED is False (build-level lock)
+2026-06-29 21:04:15,315 INFO preflight: ok=False reason=EXECUTION_ENABLED is False (build-level lock)
+2026-06-29 21:04:51,235 INFO preflight: ok=False reason=EXECUTION_ENABLED is False (build-level lock)
+2026-06-29 21:20:04,778 INFO preflight: ok=False reason=EXECUTION_ENABLED is False (build-level lock)
+2026-06-29 21:20:04,778 INFO preflight: ok=False reason=EXECUTION_ENABLED is False (build-level lock)
