@@ -168,12 +168,19 @@ def run_loop(specs, bars_by_key, time_budget_s, min_trades=30, log=print) -> Loo
     if any_proxy:
         result.notes.append(PROXY_WARNING)
 
-    # Rank by validation return, require a usable validation sample.
-    usable = [c for c in result.candidates if c.validation_trades >= min_trades]
+    # A finalist must (a) have a usable validation sample AND (b) actually be
+    # PROFITABLE on validation. A strategy that LOST out-of-sample has already
+    # failed — running it through the holdout and calling the result an edge is
+    # incoherent (and was a real bug: a -7.69% strategy "won" merely by being the
+    # only one above the trade threshold). No positive-validation strategy => no
+    # finalist => no holdout look at all.
+    usable = [c for c in result.candidates
+              if c.validation_trades >= min_trades and c.validation_return > 0]
     usable.sort(key=lambda c: c.validation_return, reverse=True)
     if not usable:
-        result.notes.append("no strategy reached the minimum validation sample; "
-                            "no finalist eligible for the holdout")
+        result.notes.append("no strategy was profitable on validation with a usable "
+                            "sample; nothing eligible for the holdout (this is the "
+                            "common, honest outcome)")
         return result
 
     finalist = usable[0]
